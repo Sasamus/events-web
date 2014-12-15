@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="0;URL=/ass3_jsp_alen1200/ControllerServlet">
+<meta http-equiv="refresh" content="0;URL=/ass4_alen1200/ControllerServlet">
 <title>Insert title here</title>
 </head>
 <body>
