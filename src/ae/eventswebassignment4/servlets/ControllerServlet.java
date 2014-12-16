@@ -20,52 +20,54 @@ import ae.eventsbusinessassignment4.databasemanaging.DatabaseManager;
 @WebServlet("/ControllerServlet")
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	/**
 	 * A DatabaseManagerBean object
 	 */
-	@EJB(beanName="DatabaseManagerBean")
-	private DatabaseManager databaseManager;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ControllerServlet() {
-        super();
-    }
-    
+	@EJB(beanInterface = DatabaseManager.class)//(beanName = "DatabaseManagerBean")
+	private static DatabaseManager databaseManager;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
-		//Call it readData()
-		databaseManager.readData();	
-		
-		//Create page
-		createEventsOverview(request, response, "all");
+	public ControllerServlet() {
+		super();
 	}
 
-	
-	
 	/**
-	 * @param request the request
-	 * @param response the response
-	 * @param city the city to filter
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
+		// Call it readData()
+		//databaseManager.readData();
+
+		// Create page
+		//createEventsOverview(request, response, "all");
+	}
+
+	/**
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param city
+	 *            the city to filter
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	private void createEventsOverview(HttpServletRequest request, HttpServletResponse response, String city)
-			throws ServletException, IOException{
-		
-		//Get a RequestDispatcher for EventsOverview
-		RequestDispatcher requestdispatcher = request.getRequestDispatcher("/EventsOverview.jsp");
-		
-		//Forward request
-        requestdispatcher.forward(request, response);
-		
+	private void createEventsOverview(HttpServletRequest request,
+			HttpServletResponse response, String city) throws ServletException,
+			IOException {
+
+		// Get a RequestDispatcher for EventsOverview
+		RequestDispatcher requestdispatcher = request
+				.getRequestDispatcher("/EventsOverview.jsp");
+
+		// Forward request
+		requestdispatcher.forward(request, response);
+
 	}
 }
