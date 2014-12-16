@@ -2,12 +2,15 @@ package ae.eventswebassignment4.servlets;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import ae.eventsbusinessassignment4.databasemanaging.DatabaseManager;
 
 /**
  * Servlet implementation class ControllerServlet
@@ -17,6 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/ControllerServlet")
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	
+	/**
+	 * A DatabaseManagerBean object
+	 */
+	@EJB(beanName="DatabaseManagerBean")
+	private DatabaseManager databaseManager;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,11 +42,8 @@ public class ControllerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		//Create a DatabaseManager object
-		//DatabaseManager databaseManager = new DatabaseManager();
-		
 		//Call it readData()
-		//databaseManager.readData();	
+		databaseManager.readData();	
 		
 		//Create page
 		createEventsOverview(request, response, "all");
