@@ -3,6 +3,7 @@
 	<name>events-web-assignment4</name>
 	<comment></comment>
 	<projects>
+		<project>events-business-assignment4</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
