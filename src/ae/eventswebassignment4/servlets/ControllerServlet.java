@@ -22,9 +22,9 @@ import ae.eventsbusinessassignment4.databasemanaging.DatabaseManagerBean;
 @WebServlet("/ControllerServlet")
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	//TODO: Page counters shared?
-	//TODO: Synchronization
+
+	// TODO: Page counters shared?
+	// TODO: Synchronization
 
 	/**
 	 * A DatabaseManagerBean object
