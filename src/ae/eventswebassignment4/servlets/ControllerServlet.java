@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ae.eventsbusinessassignment4.databasemanaging.DatabaseManagerBean;
 import ae.eventsbusinessassignment4.entities.Comment;
@@ -47,6 +48,48 @@ public class ControllerServlet extends HttpServlet {
 	public ControllerServlet() {
 		super();
 	}
+	
+	 /**
+     * Increments eventOverviewCallCounter
+     */
+    private synchronized void incrementEventsOverviewCallCounter(HttpServletRequest request){
+    	incrementCallCounter(request, "eventsOverviewCallCounter");
+    }
+    
+    /**
+     * Increments addEventsCallCounter
+     */
+    private synchronized void incrementAddEventCallCounter(HttpServletRequest request){
+    	incrementCallCounter(request, "addEventCallCounter");
+    }
+    
+    /**
+     * Increments userProfileCallCounter
+     */
+    private synchronized void incrementUserProfileCallCounter(HttpServletRequest request){
+    	incrementCallCounter(request, "userProfileCallCounter");
+    }
+    
+    /**
+     * Increments the call counter corresponding to key in session
+     * 
+     * @param request the request
+     * @param key the key to the counter in session
+     */
+    private synchronized void incrementCallCounter(HttpServletRequest request, String key){
+    	
+		HttpSession session = request.getSession(true);
+
+	    Integer visitCount = (Integer) session.getAttribute(key);
+	    
+	    if(visitCount == null) {
+	    	visitCount = 0;
+	    }
+	    
+	    visitCount = new Integer(visitCount.intValue() + 1);
+	    
+	    session.setAttribute(key, visitCount);
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -150,6 +193,58 @@ public class ControllerServlet extends HttpServlet {
 		
 		
 	}
+	
+	/**
+	 * @param request the request
+	 * @param response the response
+	 * @param user the user to show
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void createUserProfile(HttpServletRequest request, HttpServletResponse response, User user)
+			throws ServletException, IOException{
+		
+		//Get a RequestDispatcher for UserProfile
+		RequestDispatcher requestdispatcher = request.getRequestDispatcher("/UserProfile.jsp");
+		
+		//Set attribute user
+		request.setAttribute("user", user);
+		
+		//Get Lists of past and future Events user organizes
+		List<Event> pastEvents = databaseManagerBean.getEventsUserOrganizes(true, false, user);
+		List<Event> futureEvents = databaseManagerBean.getEventsUserOrganizes(false, true, user);
+		
+		//Set attributes with the number of the events
+		request.setAttribute("nrPastEvents", pastEvents.size());
+		request.setAttribute("nrFutureEvents", futureEvents.size());
+		
+		//Increment userProfileCallCounter
+		incrementUserProfileCallCounter(request);
+		
+		//Forward request
+        requestdispatcher.forward(request, response);
+		
+	}
+	
+	/**
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void createAddEvent(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		
+		//Increment addEventCallCounter
+		incrementAddEventCallCounter(request);
+		
+		//Get a RequestDispatcher for AddEvent
+		RequestDispatcher requestdispatcher = request.getRequestDispatcher("/AddEvent.jsp");
+		
+		//Forward request
+        requestdispatcher.forward(request, response);
+		
+	}
 
 	/**
 	 * @param request
@@ -198,8 +293,7 @@ public class ControllerServlet extends HttpServlet {
 		request.setAttribute("organizerUserMap", organizerUserMap);
 		
 		//Increment eventsOverviewCallCounter
-		//TODO: Uncomment
-		//incrementEventsOverviewCallCounter(request);
+		incrementEventsOverviewCallCounter(request);
 		
 		//Get a RequestDispatcher for EventsOverview
 		RequestDispatcher requestdispatcher = request.getRequestDispatcher("/EventsOverview.jsp");
