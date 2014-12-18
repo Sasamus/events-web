@@ -35,6 +35,8 @@ public class ControllerServlet extends HttpServlet {
 	// TODO: Page counters shared?
 	// TODO: Synchronization
 	// TODO: Entities bean name
+	// TODO: Images
+	// TODO: Only read data on deploy, possible?
 
 	/**
 	 * A DatabaseManagerBean object
