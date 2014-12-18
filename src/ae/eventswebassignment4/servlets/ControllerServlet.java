@@ -97,7 +97,7 @@ public class ControllerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request,
+	protected synchronized void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
 		// Call readData()
@@ -111,7 +111,7 @@ public class ControllerServlet extends HttpServlet {
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		//Check what page to create
@@ -203,7 +203,7 @@ public class ControllerServlet extends HttpServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	private void createUserProfile(HttpServletRequest request, HttpServletResponse response, User user)
+	private synchronized void createUserProfile(HttpServletRequest request, HttpServletResponse response, User user)
 			throws ServletException, IOException{
 		
 		//Get a RequestDispatcher for UserProfile
@@ -234,7 +234,7 @@ public class ControllerServlet extends HttpServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	private void createAddEvent(HttpServletRequest request, HttpServletResponse response)
+	private synchronized void createAddEvent(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
 		
 		//Increment addEventCallCounter
@@ -258,7 +258,7 @@ public class ControllerServlet extends HttpServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	private void createEventsOverview(HttpServletRequest request,
+	private synchronized void createEventsOverview(HttpServletRequest request,
 			HttpServletResponse response, String city) throws ServletException,
 			IOException {
 
