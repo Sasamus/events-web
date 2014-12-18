@@ -9,7 +9,7 @@
 <title>User Profile</title>
 </head>
 <body>
-	<!-- <img src="ImageServlet?userId=${user.getId()}">  -->
+	<img src="ImageServlet?userId=${user.getId()}">
 	<p>Name: ${user.getFirstName()} ${user.getLastName()}</p>
 	<p>Organizing future events: ${nrFutureEvents}</p>
 	<p>Organized past events: ${nrPastEvents}</p>

@@ -33,9 +33,7 @@ public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// TODO: Page counters shared?
-	// TODO: Synchronization
 	// TODO: Entities bean name
-	// TODO: Images
 	// TODO: Only read data on deploy, possible?
 
 	/**
@@ -100,8 +98,9 @@ public class ControllerServlet extends HttpServlet {
 	protected synchronized void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		// TODO: Uncomment
 		// Call readData()
-		databaseManagerBean.readData();
+		//databaseManagerBean.readData();
 
 		// Create page
 		createEventsOverview(request, response, "all");
