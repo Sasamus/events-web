@@ -1,14 +1,12 @@
 package ae.eventswebassignment4.servlets;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ae.eventsbusinessassignment4.beans.AddEventBean;
 import ae.eventsbusinessassignment4.beans.CallCounterBean;
-import ae.eventsbusinessassignment4.databasemanaging.DatabaseManagerBean;
 import ae.eventsbusinessassignment4.entities.Comment;
 import ae.eventsbusinessassignment4.entities.Event;
 import ae.eventsbusinessassignment4.entities.User;
@@ -27,21 +25,28 @@ import ae.eventsbusinessassignment4.entities.User;
  * 
  * @author Albin Engström
  */
-@Singleton
+@Stateless
 @WebServlet("/ControllerServlet")
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	// TODO: Individual page counters on all user pages
 
 	/**
 	 * A DatabaseManagerBean object
 	 */
 	@EJB(beanName = "DatabaseManagerBean")
-	private DatabaseManagerBean databaseManagerBean;
+	private ae.eventsbusinessassignment4.beans.DatabaseManagerBean databaseManagerBean;
 
+	/**
+	 * A CallCounterBean object
+	 */
 	@EJB(beanName = "CallCounterBean")
 	private CallCounterBean callcounterbean;
+
+	/**
+	 * An AddEventBean object
+	 */
+	@EJB(beanName = "AddEventBean")
+	private AddEventBean addeventbean;
 
 	/**
 	 * Keeps track of if data have been read from file
@@ -97,38 +102,8 @@ public class ControllerServlet extends HttpServlet {
 
 		} else if (request.getParameter("NewEvent").equals("true")) {
 
-			// An Event object
-			Event event = new Event();
-
-			// Set it's values
-			event.setEventTitle(request.getParameter("title"));
-			event.setEventCity(request.getParameter("city"));
-			event.setEventDescription(request.getParameter("description"));
-
-			// Get times
-			String startTime = request.getParameter("starttime");
-			String endTime = request.getParameter("endtime");
-
-			// Create Timestamps with the time Strings
-			Timestamp timestampStart = Timestamp.valueOf(startTime);
-			Timestamp timestampEnd = Timestamp.valueOf(endTime);
-
-			// Create a Timestamp with the current time
-			Timestamp currentTimestamp = new Timestamp(new Date().getTime());
-
-			// Set event's time related fields
-			event.setEventStart(timestampStart);
-			event.setEventEnd(timestampEnd);
-			event.setLastUpdate(currentTimestamp);
-
-			// Get Organizer
-			String userId = request.getParameter("organizerId");
-
-			// The User
-			User user = databaseManagerBean.getUser(Integer.parseInt(userId));
-
-			// Add Event
-			databaseManagerBean.addEvent(event, user);
+			// Add event
+			addeventbean.addEvent(request);
 
 			// Create EventsOverview
 			createEventsOverview(request, response, "all");

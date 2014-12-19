@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ae.eventsbusinessassignment4.databasemanaging.DatabaseManagerBean;
 import ae.eventsbusinessassignment4.entities.User;
 
 /**
@@ -30,7 +29,7 @@ public class ImageServlet extends HttpServlet {
 	 * A DatabaseManagerBean object
 	 */
 	@EJB(beanName = "DatabaseManagerBean")
-	private DatabaseManagerBean databaseManagerBean;
+	private ae.eventsbusinessassignment4.beans.DatabaseManagerBean databaseManagerBean;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
