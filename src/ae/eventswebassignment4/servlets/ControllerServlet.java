@@ -67,7 +67,7 @@ public class ControllerServlet extends HttpServlet {
 	protected synchronized void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		// Call readData()
+		// Read Data
 		if (!dataRead) {
 			databaseManagerBean.readData();
 			dataRead = true;
