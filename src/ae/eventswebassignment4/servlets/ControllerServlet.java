@@ -39,7 +39,7 @@ public class ControllerServlet extends HttpServlet {
 	 */
 	@EJB(beanName = "DatabaseManagerBean")
 	private DatabaseManagerBean databaseManagerBean;
-	
+
 	@EJB(beanName = "CallCounterBean")
 	private CallCounterBean callcounterbean;
 
@@ -94,6 +94,7 @@ public class ControllerServlet extends HttpServlet {
 
 			// Create AddVent
 			createAddEvent(request, response);
+
 		} else if (request.getParameter("NewEvent").equals("true")) {
 
 			// An Event object
@@ -192,10 +193,11 @@ public class ControllerServlet extends HttpServlet {
 		request.setAttribute("nrFutureEvents", futureEvents.size());
 
 		// Increment userProfileCallCounter
-		callcounterbean.incrementUserProfileCallCounter();
+		callcounterbean.incrementUserProfileCallCounter(user.getId());
 
 		// Add userPofileCallCounter to request
-		request.setAttribute("callCounter", callcounterbean.getUserProfileCallCounter());
+		request.setAttribute("callCounter",
+				callcounterbean.getUserProfileCallCounter(user.getId()));
 
 		// Forward request
 		requestdispatcher.forward(request, response);
@@ -217,7 +219,8 @@ public class ControllerServlet extends HttpServlet {
 		callcounterbean.incrementAddEventCallCounter();
 
 		// Add addUsereCallCounter to request
-		request.setAttribute("callCounter", callcounterbean.getAddEventCallCounter());
+		request.setAttribute("callCounter",
+				callcounterbean.getAddEventCallCounter());
 
 		// Get a RequestDispatcher for AddEvent
 		RequestDispatcher requestdispatcher = request
@@ -276,7 +279,8 @@ public class ControllerServlet extends HttpServlet {
 		callcounterbean.incrementEventsOverviewCallCounter();
 
 		// Add eventsOverviewCallCounter to request
-		request.setAttribute("callCounter", callcounterbean.getEventsOverviewCallCounter());
+		request.setAttribute("callCounter",
+				callcounterbean.getEventsOverviewCallCounter());
 
 		// Get a RequestDispatcher for EventsOverview
 		RequestDispatcher requestdispatcher = request
