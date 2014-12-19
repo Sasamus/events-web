@@ -15,6 +15,6 @@
 	<p>Organized past events: ${nrPastEvents}</p>
 	<p>Comments: ${nrComments}</p>
 	<p>&nbsp;</p>
-	<p>Page have been visited ${userProfileCallCounter} times</p>
+	<p>Page have been visited ${callCounter} times</p>
 </body>
 </html>

@@ -73,7 +73,7 @@
 			<button type="submit">Add Event</button>
 		</form>
 		<p>&nbsp;</p>
-		<p>Page have been visited ${eventsOverviewCallCounter} times</p>
+		<p>Page have been visited ${callCounter} times</p>
 
 	</div>
 

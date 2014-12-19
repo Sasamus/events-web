@@ -38,6 +38,6 @@
 		<button type="submit">Submit</button>
 	</form>
 	<p>&nbsp;</p>
-	<p>Page have been visited ${addEventCallCounter} times</p>
+	<p>Page have been visited ${callCounter} times</p>
 </body>
 </html>

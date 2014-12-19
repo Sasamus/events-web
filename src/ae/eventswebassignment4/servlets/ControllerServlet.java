@@ -15,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import ae.eventsbusinessassignment4.databasemanaging.DatabaseManagerBean;
 import ae.eventsbusinessassignment4.entities.Comment;
@@ -40,7 +39,25 @@ public class ControllerServlet extends HttpServlet {
 	@EJB(beanName = "DatabaseManagerBean")
 	private DatabaseManagerBean databaseManagerBean;
 
+	/**
+	 * Keeps track of if data have been read from file
+	 */
 	boolean dataRead = false;
+
+	/**
+	 * Counts the calls to show EventsOverview
+	 */
+	int eventsOverviewCallCounter = 0;
+
+	/**
+	 * Counts the calls to show UserProfile
+	 */
+	int userProfileCallCounter = 0;
+
+	/**
+	 * Counts the calls to show AddEvent
+	 */
+	int addEventCallCounter = 0;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -52,49 +69,22 @@ public class ControllerServlet extends HttpServlet {
 	/**
 	 * Increments eventOverviewCallCounter
 	 */
-	private synchronized void incrementEventsOverviewCallCounter(
-			HttpServletRequest request) {
-		incrementCallCounter(request, "eventsOverviewCallCounter");
+	private synchronized void incrementEventsOverviewCallCounter() {
+		eventsOverviewCallCounter++;
 	}
 
 	/**
 	 * Increments addEventsCallCounter
 	 */
-	private synchronized void incrementAddEventCallCounter(
-			HttpServletRequest request) {
-		incrementCallCounter(request, "addEventCallCounter");
+	private synchronized void incrementAddEventCallCounter() {
+		addEventCallCounter++;
 	}
 
 	/**
 	 * Increments userProfileCallCounter
 	 */
-	private synchronized void incrementUserProfileCallCounter(
-			HttpServletRequest request) {
-		incrementCallCounter(request, "userProfileCallCounter");
-	}
-
-	/**
-	 * Increments the call counter corresponding to key in session
-	 * 
-	 * @param request
-	 *            the request
-	 * @param key
-	 *            the key to the counter in session
-	 */
-	private synchronized void incrementCallCounter(HttpServletRequest request,
-			String key) {
-
-		HttpSession session = request.getSession(true);
-
-		Integer visitCount = (Integer) session.getAttribute(key);
-
-		if (visitCount == null) {
-			visitCount = 0;
-		}
-
-		visitCount = new Integer(visitCount.intValue() + 1);
-
-		session.setAttribute(key, visitCount);
+	private synchronized void incrementUserProfileCallCounter() {
+		userProfileCallCounter++;
 	}
 
 	/**
@@ -234,7 +224,10 @@ public class ControllerServlet extends HttpServlet {
 		request.setAttribute("nrFutureEvents", futureEvents.size());
 
 		// Increment userProfileCallCounter
-		incrementUserProfileCallCounter(request);
+		incrementUserProfileCallCounter();
+
+		// Add userPofileCallCounter to request
+		request.setAttribute("callCounter", userProfileCallCounter);
 
 		// Forward request
 		requestdispatcher.forward(request, response);
@@ -253,7 +246,10 @@ public class ControllerServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		// Increment addEventCallCounter
-		incrementAddEventCallCounter(request);
+		incrementAddEventCallCounter();
+
+		// Add addUsereCallCounter to request
+		request.setAttribute("callCounter", addEventCallCounter);
 
 		// Get a RequestDispatcher for AddEvent
 		RequestDispatcher requestdispatcher = request
@@ -309,7 +305,10 @@ public class ControllerServlet extends HttpServlet {
 		request.setAttribute("organizerUserMap", organizerUserMap);
 
 		// Increment eventsOverviewCallCounter
-		incrementEventsOverviewCallCounter(request);
+		incrementEventsOverviewCallCounter();
+
+		// Add eventsOverviewCallCounter to request
+		request.setAttribute("callCounter", eventsOverviewCallCounter);
 
 		// Get a RequestDispatcher for EventsOverview
 		RequestDispatcher requestdispatcher = request
