@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>events-web-assignment4</name>
+	<name>events-web</name>
 	<comment></comment>
 	<projects>
-		<project>events-business-assignment4</project>
+		<project>events-business</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
