@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="refresh"
-	content="0;URL=/events-web-assignment4/ControllerServlet">
+	content="0;URL=/events-web/ControllerServlet">
 <title>Insert title here</title>
 </head>
 <body>
