@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ae.eventsbusiness.beans.AddEventBean;
-import ae.eventsbusiness.beans.CalendarManagerBean;
 import ae.eventsbusiness.beans.CallCounterBean;
 import ae.eventsbusiness.entities.Comment;
 import ae.eventsbusiness.entities.Event;
@@ -61,9 +60,6 @@ public class ControllerServlet extends HttpServlet {
 		super();
 	}
 
-	@EJB(beanName = "CalendarManagerBean")
-	CalendarManagerBean calendarManagerBean;
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -76,10 +72,6 @@ public class ControllerServlet extends HttpServlet {
 			databaseManagerBean.readData();
 			dataRead = true;
 		}
-
-		calendarManagerBean.createCalendar();
-		calendarManagerBean.listAllCalendars();
-		calendarManagerBean.deleteAllCalendars();
 
 		// Create page
 		createEventsOverview(request, response, "all");
