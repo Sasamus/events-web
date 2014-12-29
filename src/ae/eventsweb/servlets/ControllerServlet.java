@@ -1,4 +1,4 @@
-package ae.eventswebassignment4.servlets;
+package ae.eventsweb.servlets;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ae.eventsbusinessassignment4.beans.AddEventBean;
-import ae.eventsbusinessassignment4.beans.CallCounterBean;
-import ae.eventsbusinessassignment4.entities.Comment;
-import ae.eventsbusinessassignment4.entities.Event;
-import ae.eventsbusinessassignment4.entities.User;
+import ae.eventsbusiness.beans.AddEventBean;
+import ae.eventsbusiness.beans.CallCounterBean;
+import ae.eventsbusiness.entities.Comment;
+import ae.eventsbusiness.entities.Event;
+import ae.eventsbusiness.entities.User;
 
 /**
  * Servlet implementation class ControllerServlet
@@ -34,7 +34,7 @@ public class ControllerServlet extends HttpServlet {
 	 * A DatabaseManagerBean object
 	 */
 	@EJB(beanName = "DatabaseManagerBean")
-	private ae.eventsbusinessassignment4.beans.DatabaseManagerBean databaseManagerBean;
+	private ae.eventsbusiness.beans.DatabaseManagerBean databaseManagerBean;
 
 	/**
 	 * A CallCounterBean object

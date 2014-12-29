@@ -1,4 +1,4 @@
-package ae.eventswebassignment4.servlets;
+package ae.eventsweb.servlets;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ae.eventsbusinessassignment4.entities.User;
+import ae.eventsbusiness.entities.User;
 
 /**
  * Servlet implementation class ImageServlet
@@ -29,7 +29,7 @@ public class ImageServlet extends HttpServlet {
 	 * A DatabaseManagerBean object
 	 */
 	@EJB(beanName = "DatabaseManagerBean")
-	private ae.eventsbusinessassignment4.beans.DatabaseManagerBean databaseManagerBean;
+	private ae.eventsbusiness.beans.DatabaseManagerBean databaseManagerBean;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
