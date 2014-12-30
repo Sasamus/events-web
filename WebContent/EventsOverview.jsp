@@ -12,6 +12,10 @@
 
 	<!-- Create a div -->
 	<div id="wrap">
+	
+		<iframe src="https://www.google.com/calendar/embed?
+		src=im44aorihb6bf8lgv251lfg6kk%40group.calendar.google.com&ctz=Europe/Stockholm"
+		 style="border:solid 1px #777" width="500" height="375" frameborder="0" scrolling="no"></iframe>
 
 		<form action="ControllerServlet" method="post">
 			<input type="text" name="filter"> <input type="hidden"
