@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.ejb.Singleton;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +25,7 @@ import ae.eventsbusiness.entities.User;
  * 
  * @author Albin Engström
  */
-@Stateless
+@Singleton
 @WebServlet("/ControllerServlet")
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
