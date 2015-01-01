@@ -12,9 +12,11 @@
 
 	<!-- Create a div -->
 	<div id="wrap">
-	
-		<iframe src="${calendarSrc}"
-		 style="border:solid 1px #777" width="500" height="375" frameborder="0" scrolling="no"></iframe>
+		
+		<c:if test="${calendarSrc != null}">
+			<iframe src="${calendarSrc}"
+			 style="border:solid 1px #777" width="500" height="375" frameborder="0" scrolling="no"></iframe>
+		</c:if>
 
 		<form action="ControllerServlet" method="post">
 			<input type="text" name="filter"> <input type="hidden"

@@ -225,16 +225,24 @@ public class ControllerServlet extends HttpServlet {
 
 			// Get all Events and put them in events
 			events = databaseManagerBean.getAllEvents();
+			
+			// Set calendarSrc int request to null 
+			request.setAttribute("calendarSrc", null);
+			
 		} else {
 
 			// Get Events and put them in events
 			events = databaseManagerBean.getCityEvents(city);
+			
+			// Create a calendar source
+			String calendarSrc = "https://www.google.com/calendar/embed?src=" 
+			+ databaseManagerBean.getCalendarId(city) + "&ctz=Europe/Stockholm";
+			
+			System.out.println("MyDebug:" + calendarSrc);
+			
+			// Add calendarSrc to request 
+			request.setAttribute("calendarSrc", calendarSrc);
 		}	
-		
-		// TODO: Trace back and comment/adapt to be dynamic. Just for testing at this point.
-		String calendarSrc = "https://www.google.com/calendar/embed?src=" 
-		+ databaseManagerBean.getCalendarId() + "&ctz=Europe/Stockholm";
-		request.setAttribute("calendarSrc", calendarSrc);
 
 		// Add events to request
 		request.setAttribute("eventsList", events);
